@@ -1,6 +1,7 @@
 import {
   HomeContainer,
   Pagination,
+  PaginationButton,
   ProductActionsSection,
   ProductSearch,
   ProductsContainer,
@@ -54,6 +55,10 @@ export function Home() {
     }
   }
 
+  function handleChangePage(page: number) {
+    setPage(page)
+  }
+
   useEffect(() => {
     if (page) {
       fetchProducts(page)
@@ -99,15 +104,33 @@ export function Home() {
       </ProductsContainer>
 
       <Pagination>
-        <span onClick={handlePreviousPage}>
+        <PaginationButton onClick={handlePreviousPage}>
           <CaretLeft size={20} weight="bold" />
-        </span>
-        {page > 1 && <span>{page - 1}</span>}
-        <span>{page}</span>
-        {page < pagesCount && <span>{page + 1}</span>}
-        <span onClick={handleNextPage}>
+        </PaginationButton>
+        {page === pagesCount && (
+          <PaginationButton onClick={() => handleChangePage(page - 2)}>
+            {page - 2}
+          </PaginationButton>
+        )}
+        {page > 1 && (
+          <PaginationButton onClick={() => handleChangePage(page - 1)}>
+            {page - 1}
+          </PaginationButton>
+        )}
+        <PaginationButton variant="active">{page}</PaginationButton>
+        {page < pagesCount && (
+          <PaginationButton onClick={() => handleChangePage(page + 1)}>
+            {page + 1}
+          </PaginationButton>
+        )}
+        {page === 1 && (
+          <PaginationButton onClick={() => handleChangePage(page + 2)}>
+            {page + 2}
+          </PaginationButton>
+        )}
+        <PaginationButton onClick={handleNextPage}>
           <CaretRight size={20} weight="bold" />
-        </span>
+        </PaginationButton>
       </Pagination>
     </HomeContainer>
   )

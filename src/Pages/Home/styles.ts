@@ -66,22 +66,35 @@ export const Pagination = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.75rem;
+`
 
-  > span {
-    all: unset;
-    width: 2rem;
-    height: 2rem;
-    background: ${({ theme }) => theme.colors['base-button']};
-    border-radius: 4px;
+interface PaginationButtonProps {
+  variant?: 'active'
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const PaginationButton = styled.span<PaginationButtonProps>`
+  all: unset;
+  width: 2rem;
+  height: 2rem;
+  background: ${({ theme, variant }) =>
+    variant ? theme.colors.purple : theme.colors['base-button']};
+  border-radius: 4px;
+  color: ${({ theme, variant }) =>
+    variant ? theme.colors.white : theme.colors['base-text']};
 
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &:hover {
-      background: ${({ theme }) => theme.colors['base-hover']};
-    }
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover {
+    background: ${({ theme, variant }) =>
+      variant ? theme.colors['purple-dark'] : theme.colors['base-hover']};
   }
 `
