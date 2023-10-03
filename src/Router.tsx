@@ -4,7 +4,9 @@ import { Home } from './Pages/Home'
 export function Router() {
   return (
     <Routes>
-      <Route index element={<Home />} />
+      <Route path="/">
+        <Route path="products" element={<Home />} />
+      </Route>
     </Routes>
   )
 }

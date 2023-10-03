@@ -31,8 +31,9 @@ interface ProductContextType {
   createProduct: (data: CreateProductInput) => Promise<void>
   editProduct: (productId: number, data: CreateProductInput) => Promise<void>
   deleteProduct: (productId: number) => Promise<void>
-  fetchProducts: (page: number) => Promise<void>
+  fetchProducts: (page?: number, query?: string) => Promise<void>
   products: Product[]
+  totalProducts: number
 }
 
 interface ProductProviderProps {
@@ -43,6 +44,7 @@ export const ProductContext = createContext({} as ProductContextType)
 
 export function ProductProvider({ children }: ProductProviderProps) {
   const [products, setProducts] = useState<Product[]>([])
+  const [totalProducts, setTotalProducts] = useState(0)
 
   async function createProduct(data: CreateProductInput) {
     await api.post('products', data).then(() => {
@@ -62,14 +64,16 @@ export function ProductProvider({ children }: ProductProviderProps) {
     })
   }
 
-  const fetchProducts = useCallback(async (page = 1) => {
+  const fetchProducts = useCallback(async (page = 1, query?: string) => {
     const response = await api.get('products', {
       params: {
         page,
+        query,
       },
     })
 
     setProducts(response.data.products)
+    setTotalProducts(response.data.total)
   }, [])
 
   useEffect(() => {
@@ -80,6 +84,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
     <ProductContext.Provider
       value={{
         products,
+        totalProducts,
         createProduct,
         editProduct,
         deleteProduct,
