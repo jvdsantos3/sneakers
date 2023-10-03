@@ -16,6 +16,8 @@ import { X } from 'phosphor-react'
 import { useContext, useState } from 'react'
 import { EditProductDialog, EditProductFormInputs } from '../EditProductDialog'
 import { ProductContext } from '../../contexts/ProductContext'
+import * as AlertDialog from '@radix-ui/react-alert-dialog'
+import { DeleteAlert } from '../DeleteAlert'
 
 interface ProductCardProps {
   id: number
@@ -36,20 +38,27 @@ export function ProductCard({
   size,
   amount,
 }: ProductCardProps) {
-  const [open, setOpen] = useState(false)
+  const [openDetails, setOpenDetails] = useState(false)
+  const [openEdit, setOpenEdit] = useState(false)
 
-  const { editProduct } = useContext(ProductContext)
+  const { editProduct, deleteProduct } = useContext(ProductContext)
 
   function handleEditProduct(data: EditProductFormInputs) {
     const product = { ...data, price: data.price * 100 }
 
     editProduct(id, product)
 
-    setOpen(false)
+    setOpenEdit(false)
+  }
+
+  function handleDeleteProduct() {
+    deleteProduct(id)
+
+    setOpenDetails(false)
   }
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={openDetails} onOpenChange={setOpenDetails}>
       <Dialog.Trigger asChild>
         <ProductCardContainer>
           <img src={image} alt="Image of product" />
@@ -80,12 +89,19 @@ export function ProductCard({
                 <strong>{priceFormatter.format(price / 100)}</strong>
 
                 <ProductDetailSize>
-                  <strong>Tamanho</strong>
-                  <span>{size}</span>
+                  <div>
+                    <strong>Tamanho</strong>
+                    <span>{size}</span>
+                  </div>
+
+                  <div>
+                    <strong>Quantidade</strong>
+                    <span>{amount}</span>
+                  </div>
                 </ProductDetailSize>
               </ProductDetailsHeader>
               <ProductDetailsActions>
-                <Dialog.Root open={open} onOpenChange={setOpen}>
+                <Dialog.Root open={openEdit} onOpenChange={setOpenEdit}>
                   <Dialog.Trigger asChild>
                     <Button variant="yellow">Editar</Button>
                   </Dialog.Trigger>
@@ -99,7 +115,13 @@ export function ProductCard({
                     editProduct={handleEditProduct}
                   />
                 </Dialog.Root>
-                <Button variant="red">Excluir</Button>
+                <AlertDialog.Root>
+                  <AlertDialog.Trigger asChild>
+                    <Button variant="red">Excluir</Button>
+                  </AlertDialog.Trigger>
+
+                  <DeleteAlert handleDeleteProduct={handleDeleteProduct} />
+                </AlertDialog.Root>
               </ProductDetailsActions>
             </ProductDetailsContent>
           </ProductDetails>

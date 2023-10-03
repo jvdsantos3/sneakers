@@ -30,6 +30,7 @@ interface CreateProductInput {
 interface ProductContextType {
   createProduct: (data: CreateProductInput) => Promise<void>
   editProduct: (productId: number, data: CreateProductInput) => Promise<void>
+  deleteProduct: (productId: number) => Promise<void>
   fetchProducts: (page: number) => Promise<void>
   products: Product[]
 }
@@ -55,6 +56,12 @@ export function ProductProvider({ children }: ProductProviderProps) {
     })
   }
 
+  async function deleteProduct(productId: number) {
+    await api.delete(`products/${productId}`).then(() => {
+      fetchProducts()
+    })
+  }
+
   const fetchProducts = useCallback(async (page = 1) => {
     const response = await api.get('products', {
       params: {
@@ -71,7 +78,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   return (
     <ProductContext.Provider
-      value={{ products, createProduct, editProduct, fetchProducts }}
+      value={{
+        products,
+        createProduct,
+        editProduct,
+        deleteProduct,
+        fetchProducts,
+      }}
     >
       {children}
     </ProductContext.Provider>

@@ -125,26 +125,31 @@ export const ProductDetailSize = styled.div`
   margin-top: 1rem;
 
   display: flex;
-  flex-direction: column;
   gap: 1rem;
 
-  strong {
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors['base-label']};
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-
-  span {
-    width: 5rem;
-    height: 2rem;
-    background: ${({ theme }) => theme.colors['base-card']};
-    border: 1px solid ${({ theme }) => theme.colors['base-button']};
-    border-radius: 6px;
-
+  > div {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    strong {
+      font-size: 0.875rem;
+      color: ${({ theme }) => theme.colors['base-label']};
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    span {
+      width: 5rem;
+      height: 2rem;
+      background: ${({ theme }) => theme.colors['base-card']};
+      border: 1px solid ${({ theme }) => theme.colors['base-button']};
+      border-radius: 6px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 `
 
