@@ -16,22 +16,6 @@ export const ProductActionsSection = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
-
-  > button {
-    width: 12rem;
-    height: 3rem;
-    background: transparent;
-    border: 1px solid ${({ theme }) => theme.colors.purple};
-    border-radius: 8px;
-    color: ${({ theme }) => theme.colors.purple};
-    font-weight: 700;
-
-    &:hover {
-      background: ${({ theme }) => theme.colors.purple};
-      color: ${({ theme }) => theme.colors.white};
-      transition: all 0.1s;
-    }
-  }
 `
 
 export const ProductSearch = styled.div`
@@ -63,4 +47,10 @@ export const ProductSearch = styled.div`
     justify-content: center;
     cursor: pointer;
   }
+`
+
+export const ProductsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.87rem;
 `

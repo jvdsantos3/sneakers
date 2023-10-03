@@ -1,14 +1,25 @@
+import {
+  HomeContainer,
+  ProductActionsSection,
+  ProductSearch,
+  ProductsContainer,
+} from './styles'
+
 import { MagnifyingGlass } from 'phosphor-react'
 import { Header } from '../../components/Header'
 import { ProductCard } from '../../components/ProductCard'
-import { HomeContainer, ProductActionsSection, ProductSearch } from './styles'
+import { NewProductDialog } from '../../components/NewProductDialog'
+import { useContext } from 'react'
+import { ProductContext } from '../../contexts/ProductContext'
 
 export function Home() {
+  const { products } = useContext(ProductContext)
+
   return (
     <HomeContainer>
       <Header />
       <ProductActionsSection>
-        <button>Adicionar produto</button>
+        <NewProductDialog />
 
         <ProductSearch>
           <button>
@@ -17,7 +28,21 @@ export function Home() {
           <input type="text" placeholder="Pesquise um produto" />
         </ProductSearch>
       </ProductActionsSection>
-      <ProductCard />
+
+      <ProductsContainer>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            image={product.image}
+            name={product.name}
+            brand={product.brand}
+            price={product.price}
+            size={product.size}
+            amount={product.amount}
+          />
+        ))}
+      </ProductsContainer>
     </HomeContainer>
   )
 }
