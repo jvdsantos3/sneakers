@@ -110,7 +110,7 @@ export function Home() {
             <PaginationButton onClick={handlePreviousPage}>
               <CaretLeft size={20} weight="bold" />
             </PaginationButton>
-            {page === pagesCount && (
+            {page === pagesCount && page > 2 && (
               <PaginationButton onClick={() => handleChangePage(page - 2)}>
                 {page - 2}
               </PaginationButton>
