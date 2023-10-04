@@ -4,7 +4,12 @@ import { RegisterContainer, RegisterContent } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UserContext } from '../../contexts/AuthContext'
-import { Button, Form, Input } from '../../styles/global'
+import {
+  Button,
+  Form,
+  Input,
+  InputWithErroContainer,
+} from '../../styles/global'
 
 const registerFormSchema = z.object({
   name: z.string(),
@@ -41,7 +46,7 @@ export function Register() {
             placeholder="Nome"
             {...register('name')}
           />
-          <div>
+          <InputWithErroContainer>
             <Input
               type="text"
               required
@@ -49,7 +54,7 @@ export function Register() {
               {...register('email')}
             />
             {errors.email && <span>{errors.email.message}</span>}
-          </div>
+          </InputWithErroContainer>
           <Input
             type="password"
             required

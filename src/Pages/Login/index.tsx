@@ -4,7 +4,12 @@ import { LoginContainer, LoginContent } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UserContext } from '../../contexts/AuthContext'
-import { Button, Form, Input } from '../../styles/global'
+import {
+  Button,
+  Form,
+  Input,
+  InputWithErroContainer,
+} from '../../styles/global'
 
 const loginFormSchema = z.object({
   email: z.string(),
@@ -34,7 +39,7 @@ export function Login() {
         <h2>Login</h2>
 
         <Form onSubmit={handleSubmit(handleLogin)}>
-          <div>
+          <InputWithErroContainer>
             <Input
               type="text"
               required
@@ -42,7 +47,7 @@ export function Login() {
               {...register('email')}
             />
             {errors.email && <span>{errors.email.message}</span>}
-          </div>
+          </InputWithErroContainer>
           <Input
             type="password"
             required

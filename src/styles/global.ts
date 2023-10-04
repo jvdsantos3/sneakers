@@ -92,15 +92,13 @@ export const Input = styled.input`
 `
 
 export const InputWithErroContainer = styled.div`
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
-    span {
-      font-size: 0.875rem;
-      color: ${({ theme }) => theme.colors.red};
-    }
+  span {
+    font-size: 0.875rem;
+    color: ${({ theme }) => theme.colors.red};
   }
 `
 

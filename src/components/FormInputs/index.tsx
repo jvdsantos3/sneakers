@@ -55,7 +55,7 @@ export function FormInputs() {
         />
       </div>
       <Button type="submit" disabled={isSubmitting}>
-        Cadastrar
+        Salvar
       </Button>
     </FormInputsContainer>
   )
