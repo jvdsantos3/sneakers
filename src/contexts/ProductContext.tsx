@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { api } from '../lib/axios'
 import { UserContext } from './AuthContext'
+import { ToastContext } from './ToastContext'
 
 interface Product {
   id: number
@@ -49,23 +50,60 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [totalProducts, setTotalProducts] = useState(0)
 
   const { isLogged } = useContext(UserContext)
+  const { activeToast } = useContext(ToastContext)
 
   async function createProduct(data: CreateProductInput) {
-    await api.post('products', data).then(() => {
-      fetchProducts()
-    })
+    await api
+      .post('products', data)
+      .then(() => {
+        fetchProducts()
+        activeToast({
+          variant: 'success',
+          message: 'Produto cadastrado!',
+        })
+      })
+      .catch(() => {
+        activeToast({
+          variant: 'danger',
+          message: 'Erro ao cadastrar o produto, tente novamente!',
+        })
+      })
   }
 
   async function editProduct(productId: number, data: CreateProductInput) {
-    await api.put(`products/${productId}`, data).then(() => {
-      fetchProducts()
-    })
+    await api
+      .put(`products/${productId}`, data)
+      .then(() => {
+        fetchProducts()
+        activeToast({
+          variant: 'success',
+          message: 'Produto editado!',
+        })
+      })
+      .catch(() => {
+        activeToast({
+          variant: 'danger',
+          message: 'Erro ao editar o produto, tente novamente!',
+        })
+      })
   }
 
   async function deleteProduct(productId: number) {
-    await api.delete(`products/${productId}`).then(() => {
-      fetchProducts()
-    })
+    await api
+      .delete(`products/${productId}`)
+      .then(() => {
+        fetchProducts()
+        activeToast({
+          variant: 'success',
+          message: 'Produto excluído!',
+        })
+      })
+      .catch(() => {
+        activeToast({
+          variant: 'danger',
+          message: 'Erro ao editar o produto, tente novamente!',
+        })
+      })
   }
 
   const fetchProducts = useCallback(async (page = 1, query?: string) => {

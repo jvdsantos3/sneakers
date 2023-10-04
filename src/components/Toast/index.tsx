@@ -14,7 +14,7 @@ export function Toast({ variant, message }: ToastProps) {
 
   return (
     <>
-      <ToastComponent.Provider swipeDirection="right">
+      <ToastComponent.Provider swipeDirection="right" duration={3000}>
         <ToastRoot open={open} onOpenChange={setOpen} variant={variant}>
           <ToastTitle>
             {variant === 'warnig' && <Warning size={20} weight="fill" />}
