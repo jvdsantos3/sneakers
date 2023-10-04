@@ -1,7 +1,14 @@
-import { ReactNode, createContext, useState, useEffect } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+} from 'react'
 import { api } from '../lib/axios'
 import { getToken, removeTokens, storeTokens } from '../util/sessionMethods'
 import { useNavigate } from 'react-router-dom'
+import { ToastContext } from './ToastContext'
 
 interface User {
   id: number
@@ -41,19 +48,48 @@ export function UserProvider({ children }: UserProviderProps) {
 
   const navigate = useNavigate()
 
+  const { activeToast } = useContext(ToastContext)
+
   async function registerUser(data: CreateUserInput) {
-    await api.post('/users', data).then(() => {
-      navigate('/login')
-    })
+    await api
+      .post('/users', data)
+      .then(() => {
+        activeToast({
+          variant: 'success',
+          message: 'Usuário criado com sucesso!',
+        })
+        navigate('/login')
+      })
+      .catch((err) => {
+        activeToast({
+          variant: 'danger',
+          message:
+            err.response.status === 409
+              ? 'E-mail já cadastrado!'
+              : 'Falha ao tentar realizar cadastro, tente novamente!',
+        })
+      })
   }
 
   async function login(data: LoginInput) {
-    await api.post('/sessions', data).then((response) => {
-      storeTokens(response.data.token, response.data.refreshToken)
-      setIsLogged(true)
-      getProfile()
-      navigate('/')
-    })
+    await api
+      .post('/sessions', data)
+      .then((response) => {
+        storeTokens(response.data.token, response.data.refreshToken)
+        setIsLogged(true)
+        getProfile()
+        navigate('/')
+        activeToast({
+          variant: 'success',
+          message: 'Seja bem vindo!',
+        })
+      })
+      .catch(() => {
+        activeToast({
+          variant: 'danger',
+          message: 'Falha ao tentar realizar login!',
+        })
+      })
   }
 
   async function logout() {

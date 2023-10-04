@@ -9,6 +9,7 @@ export const defaultTheme = {
     red: '#AB222E',
     'red-dark': '#AA2834',
     'red-light': '#F75A68',
+    green: '#00B37E',
 
     'base-title': '#272221',
     'base-subtitle': '#403937',

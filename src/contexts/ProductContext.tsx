@@ -2,10 +2,12 @@ import {
   ReactNode,
   createContext,
   useCallback,
+  useContext,
   useEffect,
   useState,
 } from 'react'
 import { api } from '../lib/axios'
+import { UserContext } from './AuthContext'
 
 interface Product {
   id: number
@@ -46,6 +48,8 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [products, setProducts] = useState<Product[]>([])
   const [totalProducts, setTotalProducts] = useState(0)
 
+  const { isLogged } = useContext(UserContext)
+
   async function createProduct(data: CreateProductInput) {
     await api.post('products', data).then(() => {
       fetchProducts()
@@ -77,8 +81,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
   }, [])
 
   useEffect(() => {
-    fetchProducts()
-  }, [fetchProducts])
+    if (isLogged) {
+      fetchProducts()
+    }
+  }, [fetchProducts, isLogged])
 
   return (
     <ProductContext.Provider
