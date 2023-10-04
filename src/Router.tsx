@@ -10,7 +10,7 @@ export function Router() {
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route
-          path="/products"
+          index
           element={
             <Private>
               <Home />

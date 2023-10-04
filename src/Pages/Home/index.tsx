@@ -5,6 +5,7 @@ import {
   ProductActionsSection,
   ProductSearch,
   ProductsContainer,
+  ProductsEmpty,
 } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -86,50 +87,56 @@ export function Home() {
         </ProductSearch>
       </ProductActionsSection>
 
-      <ProductsContainer>
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            image={product.image}
-            name={product.name}
-            brand={product.brand}
-            price={product.price}
-            size={product.size}
-            amount={product.amount}
-          />
-        ))}
-      </ProductsContainer>
+      {products.length === 0 ? (
+        <ProductsEmpty>Sem produtos cadastrados...</ProductsEmpty>
+      ) : (
+        <>
+          <ProductsContainer>
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                image={product.image}
+                name={product.name}
+                brand={product.brand}
+                price={product.price}
+                size={product.size}
+                amount={product.amount}
+              />
+            ))}
+          </ProductsContainer>
 
-      <Pagination>
-        <PaginationButton onClick={handlePreviousPage}>
-          <CaretLeft size={20} weight="bold" />
-        </PaginationButton>
-        {page === pagesCount && (
-          <PaginationButton onClick={() => handleChangePage(page - 2)}>
-            {page - 2}
-          </PaginationButton>
-        )}
-        {page > 1 && (
-          <PaginationButton onClick={() => handleChangePage(page - 1)}>
-            {page - 1}
-          </PaginationButton>
-        )}
-        <PaginationButton variant="active">{page}</PaginationButton>
-        {page < pagesCount && (
-          <PaginationButton onClick={() => handleChangePage(page + 1)}>
-            {page + 1}
-          </PaginationButton>
-        )}
-        {page === 1 && (
-          <PaginationButton onClick={() => handleChangePage(page + 2)}>
-            {page + 2}
-          </PaginationButton>
-        )}
-        <PaginationButton onClick={handleNextPage}>
-          <CaretRight size={20} weight="bold" />
-        </PaginationButton>
-      </Pagination>
+          <Pagination>
+            <PaginationButton onClick={handlePreviousPage}>
+              <CaretLeft size={20} weight="bold" />
+            </PaginationButton>
+            {page === pagesCount && (
+              <PaginationButton onClick={() => handleChangePage(page - 2)}>
+                {page - 2}
+              </PaginationButton>
+            )}
+            {page > 1 && (
+              <PaginationButton onClick={() => handleChangePage(page - 1)}>
+                {page - 1}
+              </PaginationButton>
+            )}
+            <PaginationButton variant="active">{page}</PaginationButton>
+            {page < pagesCount && (
+              <PaginationButton onClick={() => handleChangePage(page + 1)}>
+                {page + 1}
+              </PaginationButton>
+            )}
+            {page === 1 && page < pagesCount && (
+              <PaginationButton onClick={() => handleChangePage(page + 2)}>
+                {page + 2}
+              </PaginationButton>
+            )}
+            <PaginationButton onClick={handleNextPage}>
+              <CaretRight size={20} weight="bold" />
+            </PaginationButton>
+          </Pagination>
+        </>
+      )}
     </HomeContainer>
   )
 }

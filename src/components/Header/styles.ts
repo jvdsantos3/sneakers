@@ -8,16 +8,62 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  a {
+    all: unset;
+    cursor: pointer;
+  }
+
   strong {
     font-family: 'Baloo 2', cursive;
     font-size: 2rem;
   }
 `
 
-export const HeaderProfile = styled.div`
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    a {
+      padding: 0.25rem 0;
+      border-bottom: 2px solid ${({ theme }) => theme.colors.background};
+      color: ${({ theme }) => theme.colors['base-label']};
+
+      &:hover {
+        border-color: ${({ theme }) => theme.colors.purple};
+      }
+
+      &.active {
+        color: ${({ theme }) => theme.colors.purple};
+      }
+    }
+  }
+`
+
+export const HeaderProfile = styled.nav`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  a {
+    padding: 0.25rem 0;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.background};
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors['base-subtitle']};
+
+    &:hover {
+      border-color: ${({ theme }) => theme.colors.purple};
+    }
+
+    &.active {
+      color: ${({ theme }) => theme.colors.purple};
+    }
+  }
 
   button {
     all: unset;

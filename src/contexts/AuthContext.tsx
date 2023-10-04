@@ -52,7 +52,7 @@ export function UserProvider({ children }: UserProviderProps) {
       storeTokens(response.data.token, response.data.refreshToken)
       setIsLogged(true)
       getProfile()
-      navigate('/products')
+      navigate('/')
     })
   }
 

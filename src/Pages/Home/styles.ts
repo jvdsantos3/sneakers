@@ -96,3 +96,15 @@ export const PaginationButton = styled.span<PaginationButtonProps>`
       variant ? theme.colors['purple-dark'] : theme.colors['base-hover']};
   }
 `
+
+export const ProductsEmpty = styled.div`
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors['base-label']};
+`

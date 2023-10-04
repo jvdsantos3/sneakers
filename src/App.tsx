@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
 import { ProductProvider } from './contexts/ProductContext'
 import { UserProvider } from './contexts/AuthContext'
-import { CookiesProvider } from 'react-cookie'
 
 export function App() {
   return (
@@ -13,13 +12,11 @@ export function App() {
       <GlobalStyle />
 
       <BrowserRouter>
-        <CookiesProvider>
-          <UserProvider>
-            <ProductProvider>
-              <Router />
-            </ProductProvider>
-          </UserProvider>
-        </CookiesProvider>
+        <UserProvider>
+          <ProductProvider>
+            <Router />
+          </ProductProvider>
+        </UserProvider>
       </BrowserRouter>
     </ThemeProvider>
   )
