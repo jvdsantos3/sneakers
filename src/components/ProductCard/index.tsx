@@ -1,10 +1,9 @@
 import {
-  Button,
-  CloseButton,
-  Content,
-  Overlay,
-  ProductCardContainer,
-  ProductDetailSize,
+  CardContainer,
+  CardContainerHeader,
+  ProductActionButton,
+  ProductCardContent,
+  ProductDetailTags,
   ProductDetails,
   ProductDetailsActions,
   ProductDetailsContent,
@@ -18,6 +17,7 @@ import { EditProductDialog, EditProductFormInputs } from '../EditProductDialog'
 import { ProductContext } from '../../contexts/ProductContext'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { DeleteAlert } from '../DeleteAlert'
+import { BaseDialogOverlay, DialogCloseButton } from '../../styles/global'
 
 interface ProductCardProps {
   id: number
@@ -60,24 +60,27 @@ export function ProductCard({
   return (
     <Dialog.Root open={openDetails} onOpenChange={setOpenDetails}>
       <Dialog.Trigger asChild>
-        <ProductCardContainer>
+        <CardContainer>
           <img src={image} alt="Image of product" />
 
           <div>
-            <span>{brand}</span>
+            <CardContainerHeader>
+              <span>{brand}</span>
+              <span>{size}</span>
+            </CardContainerHeader>
             <p>{name}</p>
             <strong>{priceFormatter.format(price / 100)}</strong>
           </div>
-        </ProductCardContainer>
+        </CardContainer>
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Overlay />
+        <BaseDialogOverlay />
 
-        <Content>
-          <CloseButton>
+        <ProductCardContent>
+          <DialogCloseButton>
             <X size={24} />
-          </CloseButton>
+          </DialogCloseButton>
 
           <ProductDetails>
             <img src={image} alt="Imagem do sneaker" />
@@ -88,7 +91,7 @@ export function ProductCard({
                 <span>{brand}</span>
                 <strong>{priceFormatter.format(price / 100)}</strong>
 
-                <ProductDetailSize>
+                <ProductDetailTags>
                   <div>
                     <strong>Tamanho</strong>
                     <span>{size}</span>
@@ -98,12 +101,14 @@ export function ProductCard({
                     <strong>Quantidade</strong>
                     <span>{amount}</span>
                   </div>
-                </ProductDetailSize>
+                </ProductDetailTags>
               </ProductDetailsHeader>
               <ProductDetailsActions>
                 <Dialog.Root open={openEdit} onOpenChange={setOpenEdit}>
                   <Dialog.Trigger asChild>
-                    <Button variant="yellow">Editar</Button>
+                    <ProductActionButton variant="yellow">
+                      Editar
+                    </ProductActionButton>
                   </Dialog.Trigger>
                   <EditProductDialog
                     image={image}
@@ -117,7 +122,9 @@ export function ProductCard({
                 </Dialog.Root>
                 <AlertDialog.Root>
                   <AlertDialog.Trigger asChild>
-                    <Button variant="red">Excluir</Button>
+                    <ProductActionButton variant="red">
+                      Excluir
+                    </ProductActionButton>
                   </AlertDialog.Trigger>
 
                   <DeleteAlert handleDeleteProduct={handleDeleteProduct} />
@@ -125,7 +132,7 @@ export function ProductCard({
               </ProductDetailsActions>
             </ProductDetailsContent>
           </ProductDetails>
-        </Content>
+        </ProductCardContent>
       </Dialog.Portal>
     </Dialog.Root>
   )

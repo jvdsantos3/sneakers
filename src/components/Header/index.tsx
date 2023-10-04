@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/AuthContext'
 import { NavLink } from 'react-router-dom'
 
 export function Header() {
-  const { user, logout } = useContext(UserContext)
+  const { user, isLogged, logout } = useContext(UserContext)
 
   return (
     <HeaderContainer>
@@ -15,14 +15,16 @@ export function Header() {
       </NavLink>
 
       <HeaderContent>
-        <nav>
-          <NavLink to="/login" title="Login">
-            Login
-          </NavLink>
-          <NavLink to="/register" title="Cadastrar">
-            Cadastrar
-          </NavLink>
-        </nav>
+        {!isLogged && (
+          <nav>
+            <NavLink to="/login" title="Login">
+              Login
+            </NavLink>
+            <NavLink to="/register" title="Cadastrar">
+              Cadastrar
+            </NavLink>
+          </nav>
+        )}
 
         <HeaderProfile>
           <p title="Nome do usuário">{user?.name}</p>

@@ -1,18 +1,17 @@
 import { X } from 'phosphor-react'
-import {
-  DialogClose,
-  DialogContent,
-  DialogOverlay,
-  DialogPortal,
-  DialogRoot,
-  DialogTrigger,
-} from './styles'
+import { DialogContent } from './styles'
 import * as Dialog from '@radix-ui/react-dialog'
 import { z } from 'zod'
-import { Controller, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CurrencyInput } from 'react-currency-mask'
 import { useContext, useState } from 'react'
+import {
+  BaseDialogOverlay,
+  ButtonSecondary,
+  DialogCloseButton,
+  Form,
+} from '../../styles/global'
+import { FormInputs } from '../FormInputs'
 import { ProductContext } from '../../contexts/ProductContext'
 
 const newProductFormSchema = z.object({
@@ -29,17 +28,13 @@ type NewProductFormInputs = z.infer<typeof newProductFormSchema>
 export function NewProductDialog() {
   const [open, setOpen] = useState(false)
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting },
-  } = useForm<NewProductFormInputs>({
+  const newProductForm = useForm<NewProductFormInputs>({
     resolver: zodResolver(newProductFormSchema),
   })
 
   const { createProduct } = useContext(ProductContext)
+
+  const { handleSubmit, reset } = newProductForm
 
   function handleCreateNewProduct(data: NewProductFormInputs) {
     const product = { ...data, price: data.price * 100 }
@@ -51,73 +46,26 @@ export function NewProductDialog() {
   }
 
   return (
-    <DialogRoot open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <button>Adicionar produto</button>
-      </DialogTrigger>
-      <DialogPortal>
-        <DialogOverlay />
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger asChild>
+        <ButtonSecondary variant="purple">Adicionar produto</ButtonSecondary>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <BaseDialogOverlay />
         <DialogContent>
           <Dialog.Title>Novo produto</Dialog.Title>
 
-          <DialogClose>
+          <DialogCloseButton>
             <X size={24} />
-          </DialogClose>
+          </DialogCloseButton>
 
-          <form onSubmit={handleSubmit(handleCreateNewProduct)}>
-            <input
-              type="text"
-              placeholder="Link da imagem"
-              required
-              {...register('image')}
-            />
-            <input
-              type="text"
-              placeholder="Nome do produto"
-              required
-              {...register('name')}
-            />
-            <input
-              type="text"
-              placeholder="Marca"
-              required
-              {...register('brand')}
-            />
-            <div>
-              <input
-                type="number"
-                placeholder="Tamanho"
-                required
-                {...register('size', {
-                  valueAsNumber: true,
-                })}
-              />
-              <Controller
-                control={control}
-                name="price"
-                render={({ field: { onChange, value } }) => (
-                  <CurrencyInput
-                    value={value}
-                    onChangeValue={(_, value) => {
-                      onChange(value)
-                    }}
-                    InputElement={<input placeholder="Preço" />}
-                  />
-                )}
-              />
-              <input
-                type="number"
-                placeholder="Quantidade"
-                required
-                {...register('amount')}
-              />
-            </div>
-            <button type="submit" disabled={isSubmitting}>
-              Cadastrar
-            </button>
-          </form>
+          <Form onSubmit={handleSubmit(handleCreateNewProduct)}>
+            <FormProvider {...newProductForm}>
+              <FormInputs />
+            </FormProvider>
+          </Form>
         </DialogContent>
-      </DialogPortal>
-    </DialogRoot>
+      </Dialog.Portal>
+    </Dialog.Root>
   )
 }

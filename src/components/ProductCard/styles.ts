@@ -1,8 +1,9 @@
 import styled from 'styled-components'
-import * as Dialog from '@radix-ui/react-dialog'
+import { BaseDialogContent, ButtonSecondary } from '../../styles/global'
 
-export const ProductCardContainer = styled.div`
+export const CardContainer = styled.div`
   max-width: 15rem;
+  width: 100%;
   background: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors['base-button']};
   border-radius: 10px;
@@ -17,7 +18,12 @@ export const ProductCardContainer = styled.div`
   }
 
   > div {
+    width: 100%;
+    height: 100%;
     padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
 
     span {
       font-size: 0.8rem;
@@ -28,17 +34,19 @@ export const ProductCardContainer = styled.div`
     }
 
     p {
-      margin: 0.25rem 0 0.75rem;
+      flex: 1;
+      margin: 0.5rem 0 0.75rem;
       font-size: 1rem;
     }
 
     strong {
+      justify-self: flex-end;
       color: ${({ theme }) => theme.colors.purple};
     }
   }
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.purple};
+    border: 1px solid ${({ theme }) => theme.colors.purple};
 
     p {
       color: ${({ theme }) => theme.colors.purple};
@@ -46,35 +54,14 @@ export const ProductCardContainer = styled.div`
   }
 `
 
-export const Overlay = styled(Dialog.Overlay)`
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+export const CardContainerHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
-export const Content = styled(Dialog.Content)`
-  min-width: 32rem;
-  border-radius: 6px;
-  padding: 2.5rem 3rem;
+export const ProductCardContent = styled(BaseDialogContent)`
   background: ${({ theme }) => theme.colors.white};
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
-export const CloseButton = styled(Dialog.Close)`
-  position: absolute;
-  background: transparent;
-  border: 0;
-  top: 1.5rem;
-  right: 1.5rem;
-  line-height: 0;
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors['base-title']};
 `
 
 export const ProductDetails = styled.div`
@@ -121,7 +108,7 @@ export const ProductDetailsHeader = styled.div`
   }
 `
 
-export const ProductDetailSize = styled.div`
+export const ProductDetailTags = styled.div`
   margin-top: 1rem;
 
   display: flex;
@@ -159,27 +146,7 @@ export const ProductDetailsActions = styled.div`
   column-gap: 1rem;
 `
 
-interface ButtonProps {
-  variant: 'yellow' | 'red'
-}
-
-export const Button = styled.button<ButtonProps>`
-  all: unset;
+export const ProductActionButton = styled(ButtonSecondary)`
+  width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${({ theme, variant }) => theme.colors[variant]};
-  border-radius: 6px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  color: ${({ theme, variant }) => theme.colors[variant]};
-
-  cursor: pointer;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.white};
-    background: ${({ theme, variant }) => theme.colors[variant]};
-    transition: all 0.2s;
-  }
 `

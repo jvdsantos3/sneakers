@@ -1,15 +1,11 @@
 import { X } from 'phosphor-react'
-import {
-  DialogClose,
-  DialogContent,
-  DialogOverlay,
-  DialogPortal,
-} from './styles'
+import { DialogContent, EditDialogOverlay } from './styles'
 import * as Dialog from '@radix-ui/react-dialog'
 import { z } from 'zod'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CurrencyInput } from 'react-currency-mask'
+import { DialogCloseButton, Form } from '../../styles/global'
+import { FormInputs } from '../FormInputs'
 
 const editProductFormSchema = z.object({
   image: z.string(),
@@ -41,12 +37,7 @@ export function EditProductDialog({
   amount,
   editProduct,
 }: EditProductDialogProps) {
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<EditProductFormInputs>({
+  const editProductForm = useForm<EditProductFormInputs>({
     resolver: zodResolver(editProductFormSchema),
     defaultValues: {
       image,
@@ -58,69 +49,24 @@ export function EditProductDialog({
     },
   })
 
+  const { handleSubmit } = editProductForm
+
   return (
-    <DialogPortal>
-      <DialogOverlay />
+    <Dialog.Portal>
+      <EditDialogOverlay />
       <DialogContent>
         <Dialog.Title>Editar</Dialog.Title>
 
-        <DialogClose>
+        <DialogCloseButton>
           <X size={24} />
-        </DialogClose>
+        </DialogCloseButton>
 
-        <form onSubmit={handleSubmit(editProduct)}>
-          <input
-            type="text"
-            placeholder="Link da imagem"
-            required
-            {...register('image')}
-          />
-          <input
-            type="text"
-            placeholder="Nome do produto"
-            required
-            {...register('name')}
-          />
-          <input
-            type="text"
-            placeholder="Marca"
-            required
-            {...register('brand')}
-          />
-          <div>
-            <input
-              type="number"
-              placeholder="Tamanho"
-              required
-              {...register('size', {
-                valueAsNumber: true,
-              })}
-            />
-            <Controller
-              control={control}
-              name="price"
-              render={({ field: { onChange, value } }) => (
-                <CurrencyInput
-                  value={value}
-                  onChangeValue={(_, value) => {
-                    onChange(value)
-                  }}
-                  InputElement={<input placeholder="Preço" />}
-                />
-              )}
-            />
-            <input
-              type="number"
-              placeholder="Quantidade"
-              required
-              {...register('amount')}
-            />
-          </div>
-          <button type="submit" disabled={isSubmitting}>
-            Salvar
-          </button>
-        </form>
+        <Form onSubmit={handleSubmit(editProduct)}>
+          <FormProvider {...editProductForm}>
+            <FormInputs />
+          </FormProvider>
+        </Form>
       </DialogContent>
-    </DialogPortal>
+    </Dialog.Portal>
   )
 }

@@ -4,6 +4,7 @@ import { RegisterContainer, RegisterContent } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UserContext } from '../../contexts/AuthContext'
+import { Button, Form, Input } from '../../styles/global'
 
 const registerFormSchema = z.object({
   name: z.string(),
@@ -31,17 +32,17 @@ export function Register() {
   return (
     <RegisterContainer>
       <RegisterContent>
-        <h2>Login</h2>
+        <h2>Cadastro</h2>
 
-        <form onSubmit={handleSubmit(handleRegister)}>
-          <input
+        <Form onSubmit={handleSubmit(handleRegister)}>
+          <Input
             type="text"
             required
             placeholder="Nome"
             {...register('name')}
           />
           <div>
-            <input
+            <Input
               type="text"
               required
               placeholder="E-mail"
@@ -49,16 +50,16 @@ export function Register() {
             />
             {errors.email && <span>{errors.email.message}</span>}
           </div>
-          <input
-            type="text"
+          <Input
+            type="password"
             required
             placeholder="Senha"
             {...register('password')}
           />
-          <button type="submit" disabled={isSubmitting}>
-            Entrar
-          </button>
-        </form>
+          <Button type="submit" disabled={isSubmitting}>
+            Cadastrar
+          </Button>
+        </Form>
       </RegisterContent>
     </RegisterContainer>
   )

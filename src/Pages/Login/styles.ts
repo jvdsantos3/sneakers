@@ -1,6 +1,11 @@
 import styled from 'styled-components'
-import { BaseContainer, BaseContent } from '../Register/styles'
+import { Box, FlexContainer } from '../../styles/global'
 
-export const LoginContainer = styled(BaseContainer)``
+export const LoginContainer = styled(FlexContainer)``
 
-export const LoginContent = styled(BaseContent)``
+export const LoginContent = styled(Box)`
+  h2 {
+    color: ${({ theme }) => theme.colors.purple};
+    text-align: center;
+  }
+`
