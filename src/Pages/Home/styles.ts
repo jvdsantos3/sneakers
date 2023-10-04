@@ -52,6 +52,7 @@ export const ProductSearch = styled.form`
 `
 
 export const ProductsContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 1.87rem;
