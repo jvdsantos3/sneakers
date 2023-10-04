@@ -9,7 +9,6 @@ import {
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { CaretLeft, CaretRight, MagnifyingGlass, X } from 'phosphor-react'
-import { Header } from '../../components/Header'
 import { ProductCard } from '../../components/ProductCard'
 import { NewProductDialog } from '../../components/NewProductDialog'
 import { useContext, useState, useEffect } from 'react'
@@ -67,7 +66,6 @@ export function Home() {
 
   return (
     <HomeContainer>
-      <Header />
       <ProductActionsSection>
         <NewProductDialog />
 

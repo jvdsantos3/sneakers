@@ -1,45 +1,38 @@
 import { useContext } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { RegisterContainer, RegisterContent } from './styles'
+import { LoginContainer, LoginContent } from './styles'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { UserContext } from '../../contexts/AuthContext'
 
-const registerFormSchema = z.object({
-  name: z.string(),
-  email: z.string().email({ message: 'E-mail Inválido.' }),
+const loginFormSchema = z.object({
+  email: z.string(),
   password: z.string(),
 })
 
-export type RegisterFormInputs = z.infer<typeof registerFormSchema>
+export type LoginFormInputs = z.infer<typeof loginFormSchema>
 
-export function Register() {
+export function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<RegisterFormInputs>({
-    resolver: zodResolver(registerFormSchema),
+  } = useForm<LoginFormInputs>({
+    resolver: zodResolver(loginFormSchema),
   })
 
-  const { registerUser } = useContext(UserContext)
+  const { login } = useContext(UserContext)
 
-  function handleRegister(data: RegisterFormInputs) {
-    registerUser(data)
+  function handleLogin(data: LoginFormInputs) {
+    login(data)
   }
 
   return (
-    <RegisterContainer>
-      <RegisterContent>
+    <LoginContainer>
+      <LoginContent>
         <h2>Login</h2>
 
-        <form onSubmit={handleSubmit(handleRegister)}>
-          <input
-            type="text"
-            required
-            placeholder="Nome"
-            {...register('name')}
-          />
+        <form onSubmit={handleSubmit(handleLogin)}>
           <div>
             <input
               type="text"
@@ -50,7 +43,7 @@ export function Register() {
             {errors.email && <span>{errors.email.message}</span>}
           </div>
           <input
-            type="text"
+            type="password"
             required
             placeholder="Senha"
             {...register('password')}
@@ -59,7 +52,7 @@ export function Register() {
             Entrar
           </button>
         </form>
-      </RegisterContent>
-    </RegisterContainer>
+      </LoginContent>
+    </LoginContainer>
   )
 }

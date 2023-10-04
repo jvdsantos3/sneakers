@@ -1,12 +1,13 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useState, useEffect } from 'react'
 import { api } from '../lib/axios'
 import { getToken, removeTokens, storeTokens } from '../util/sessionMethods'
+import { useNavigate } from 'react-router-dom'
 
-// interface User {
-//   id: number
-//   name: string
-//   email: string
-// }
+interface User {
+  id: number
+  name: string
+  email: string
+}
 
 interface CreateUserInput {
   name: string
@@ -21,7 +22,8 @@ interface LoginInput {
 
 interface UserContextType {
   isLogged: boolean
-  register: (data: CreateUserInput) => Promise<void>
+  user: User | null
+  registerUser: (data: CreateUserInput) => Promise<void>
   login: (data: LoginInput) => Promise<void>
   logout: () => void
   getProfile: () => Promise<void>
@@ -35,31 +37,47 @@ export const UserContext = createContext({} as UserContextType)
 
 export function UserProvider({ children }: UserProviderProps) {
   const [isLogged, setIsLogged] = useState(!!getToken())
+  const [user, setUser] = useState<User | null>(null)
 
-  async function register(data: CreateUserInput) {
-    await api.post('/users', data)
+  const navigate = useNavigate()
+
+  async function registerUser(data: CreateUserInput) {
+    await api.post('/users', data).then(() => {
+      navigate('/login')
+    })
   }
 
   async function login(data: LoginInput) {
     await api.post('/sessions', data).then((response) => {
       storeTokens(response.data.token, response.data.refreshToken)
+      setIsLogged(true)
+      getProfile()
+      navigate('/products')
     })
   }
 
   async function logout() {
     removeTokens()
     setIsLogged(false)
+    setUser(null)
+    navigate('/login')
   }
 
   async function getProfile() {
     await api.get('/account').then((response) => {
-      console.log(response)
+      setUser(response.data.user)
     })
   }
 
+  useEffect(() => {
+    if (isLogged) {
+      getProfile()
+    }
+  }, [isLogged])
+
   return (
     <UserContext.Provider
-      value={{ isLogged, register, login, logout, getProfile }}
+      value={{ isLogged, user, registerUser, login, logout, getProfile }}
     >
       {children}
     </UserContext.Provider>
