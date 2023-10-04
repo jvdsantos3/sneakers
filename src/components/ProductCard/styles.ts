@@ -10,16 +10,20 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   cursor: pointer;
 
   img {
-    width: 14rem;
+    width: 100%;
+    height: 10.625rem;
+    object-fit: contain;
+    border-radius: 10px;
   }
 
   > div {
+    justify-self: flex-end;
     width: 100%;
-    height: 100%;
     padding: 1rem;
 
     display: flex;
@@ -34,7 +38,7 @@ export const CardContainer = styled.div`
     }
 
     p {
-      flex: 1;
+      min-height: 2.5rem;
       margin: 0.5rem 0 0.75rem;
       font-size: 1rem;
     }
@@ -73,6 +77,8 @@ export const ProductDetails = styled.div`
 
   img {
     width: 50rem;
+    height: 35.625rem;
+    object-fit: contain;
   }
 `
 

@@ -18,6 +18,7 @@ import { ProductContext } from '../../contexts/ProductContext'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { DeleteAlert } from '../DeleteAlert'
 import { BaseDialogOverlay, DialogCloseButton } from '../../styles/global'
+import defaultImage from '../../assets/default_product.jpg'
 
 interface ProductCardProps {
   id: number
@@ -61,7 +62,13 @@ export function ProductCard({
     <Dialog.Root open={openDetails} onOpenChange={setOpenDetails}>
       <Dialog.Trigger asChild>
         <CardContainer>
-          <img src={image} alt="Image of product" />
+          <img
+            src={image}
+            alt="Image of product"
+            onError={(err) => {
+              return ((err.target as HTMLImageElement).src = defaultImage)
+            }}
+          />
 
           <div>
             <CardContainerHeader>
@@ -83,7 +90,13 @@ export function ProductCard({
           </DialogCloseButton>
 
           <ProductDetails>
-            <img src={image} alt="Imagem do sneaker" />
+            <img
+              src={image}
+              alt="Imagem do sneaker"
+              onError={(err) => {
+                return ((err.target as HTMLImageElement).src = defaultImage)
+              }}
+            />
 
             <ProductDetailsContent>
               <ProductDetailsHeader>
