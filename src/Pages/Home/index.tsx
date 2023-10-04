@@ -93,7 +93,7 @@ export function Home() {
       </ProductActionsSection>
 
       {products.length === 0 ? (
-        <ProductsEmpty>Sem produtos cadastrados...</ProductsEmpty>
+        <ProductsEmpty>Nem um produto encontrado...</ProductsEmpty>
       ) : (
         <>
           <ProductsContainer>
