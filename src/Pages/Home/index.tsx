@@ -26,8 +26,9 @@ export function Home() {
   const { products, totalProducts, fetchProducts } = useContext(ProductContext)
 
   const [page, setPage] = useState(1)
+  const [query, setQuery] = useState('')
 
-  const { register, handleSubmit, watch } = useForm<QueryFormSchema>({
+  const { register, handleSubmit, watch, reset } = useForm<QueryFormSchema>({
     resolver: zodResolver(queryFormSchema),
   })
 
@@ -36,10 +37,14 @@ export function Home() {
   const pagesCount = Math.ceil(totalProducts / 20)
 
   function handleSearchProduct(data: QueryFormSchema) {
+    setQuery(data.query)
     fetchProducts(1, data.query)
   }
 
   function handleCancelSearchProduct() {
+    reset()
+    setQuery('')
+    setPage(1)
     fetchProducts()
   }
 
@@ -61,9 +66,9 @@ export function Home() {
 
   useEffect(() => {
     if (page) {
-      fetchProducts(page)
+      fetchProducts(page, query)
     }
-  }, [page, fetchProducts])
+  }, [page, query, fetchProducts])
 
   return (
     <HomeContainer>
@@ -115,18 +120,22 @@ export function Home() {
                 {page - 2}
               </PaginationButton>
             )}
+
             {page > 1 && (
               <PaginationButton onClick={() => handleChangePage(page - 1)}>
                 {page - 1}
               </PaginationButton>
             )}
+
             <PaginationButton variant="active">{page}</PaginationButton>
+
             {page < pagesCount && (
               <PaginationButton onClick={() => handleChangePage(page + 1)}>
                 {page + 1}
               </PaginationButton>
             )}
-            {page === 1 && page < pagesCount && (
+
+            {page === 1 && page + 2 < pagesCount && (
               <PaginationButton onClick={() => handleChangePage(page + 2)}>
                 {page + 2}
               </PaginationButton>
