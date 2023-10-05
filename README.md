@@ -1,27 +1,61 @@
-# React + TypeScript + Vite
+# Sneakers Stock
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## O Sneakers Stock é uma aplicação para o gerenciamento de Sneakers
 
-Currently, two official plugins are available:
+### Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [x] Cadastro de usuário
+- [x] Autenticação de usuário
+- [x] Cadastro de produto
+- [x] Edição de produto
+- [x] Exclusão de produto
+- [x] Listagem de produtos
 
-## Expanding the ESLint configuration
+### Pré-requisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
-- Configure the top-level `parserOptions` property like this:
+### 🎲 Rodando o Front End
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+# Clone este repositório
+$ git clone <https://github.com/jvdsantos3/sneakers>
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd sneakers
+
+# Instale as dependências
+$ npm install
+
+# Execute a aplicação
+$ npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [React](https://pt-br.reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Styled Components](https://styled-components.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [React Router Dom](https://reactrouter.com/en/main)
+- [Axios](https://axios-http.com/ptbr/docs/intro)
+- [Radix UI](https://www.radix-ui.com/)
+- [Phospohor icons](https://phosphoricons.com/)
+- [Zod](https://zod.dev/)
+
+### Autor
+
+---
+
+<a href="https://www.linkedin.com/in/jvdsantosalcantara/">
+ <img style="border-radius: 50%;" src="https://github.com/jvdsantos3.png" width="100px;" alt=""/>
+ <br />
+ <sub><b>João Vitor</b></sub></a> <a href="https://www.linkedin.com/in/jvdsantosalcantara/" title="Linkedin">🚀</a>
+
+Feito por João Vitor
+
+[![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/jvdsantosalcantara/)
