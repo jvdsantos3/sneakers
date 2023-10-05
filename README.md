@@ -58,4 +58,4 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 Feito por João Vitor
 
-[![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/jvdsantosalcantara/)
+[![Linkedin Badge](https://img.shields.io/badge/-João-Vitor-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/jvdsantosalcantara/)
