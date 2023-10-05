@@ -57,5 +57,3 @@ As seguintes ferramentas foram usadas na construção do projeto:
  <sub><b>João Vitor</b></sub></a> <a href="https://www.linkedin.com/in/jvdsantosalcantara/" title="Linkedin">🚀</a>
 
 Feito por João Vitor
-
-[![Linkedin Badge](https://img.shields.io/badge/-João-Vitor-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/jvdsantosalcantara/)
