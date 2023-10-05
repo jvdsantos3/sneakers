@@ -1,6 +1,6 @@
 # Sneakers Stock
 
-## O Sneakers Stock é uma aplicação para o gerenciamento de Sneakers
+## O Sneakers Stock é uma aplicação para o gerenciamento do estoque de Sneakers
 
 ### Features
 
