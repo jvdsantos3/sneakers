@@ -48,7 +48,7 @@ export function NewProductDialog() {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <ButtonSecondary variant="purple">Adicionar produto</ButtonSecondary>
+        <ButtonSecondary $variant="purple">Adicionar produto</ButtonSecondary>
       </Dialog.Trigger>
       <Dialog.Portal>
         <BaseDialogOverlay />

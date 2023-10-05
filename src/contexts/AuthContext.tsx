@@ -55,14 +55,14 @@ export function UserProvider({ children }: UserProviderProps) {
       .post('/users', data)
       .then(() => {
         activeToast({
-          variant: 'success',
+          $variant: 'success',
           message: 'Usuário criado com sucesso!',
         })
         navigate('/login')
       })
       .catch((err) => {
         activeToast({
-          variant: 'danger',
+          $variant: 'danger',
           message:
             err.response.status === 409
               ? 'E-mail já cadastrado!'
@@ -80,13 +80,13 @@ export function UserProvider({ children }: UserProviderProps) {
         getProfile()
         navigate('/')
         activeToast({
-          variant: 'success',
+          $variant: 'success',
           message: 'Seja bem vindo!',
         })
       })
       .catch(() => {
         activeToast({
-          variant: 'danger',
+          $variant: 'danger',
           message: 'Falha ao tentar realizar login!',
         })
       })

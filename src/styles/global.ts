@@ -126,18 +126,18 @@ export const Button = styled.button`
 `
 
 interface ButtonSecondaryProps {
-  variant: 'yellow' | 'red' | 'purple'
+  $variant: 'yellow' | 'red' | 'purple'
 }
 
 export const ButtonSecondary = styled.button<ButtonSecondaryProps>`
   width: 12rem;
   height: 3rem;
   background: transparent;
-  border: 1px solid ${({ theme, variant }) => theme.colors[variant]};
+  border: 1px solid ${({ theme, $variant }) => theme.colors[$variant]};
   border-radius: 8px;
   cursor: pointer;
 
-  color: ${({ theme, variant }) => theme.colors[variant]};
+  color: ${({ theme, $variant }) => theme.colors[$variant]};
   font-weight: 700;
 
   display: flex;
@@ -146,7 +146,7 @@ export const ButtonSecondary = styled.button<ButtonSecondaryProps>`
   gap: 0.5rem;
 
   &:hover {
-    background: ${({ theme, variant }) => theme.colors[variant]};
+    background: ${({ theme, $variant }) => theme.colors[$variant]};
     color: ${({ theme }) => theme.colors.white};
     transition: all 0.1s;
   }

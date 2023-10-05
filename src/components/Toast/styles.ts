@@ -30,18 +30,18 @@ const swipeOut = keyframes`
 `
 
 interface ToastRootProps {
-  variant: 'warnig' | 'danger' | 'success'
+  $variant: 'warnig' | 'danger' | 'success'
 }
 
-const toastRootVariants = {
+const toastRoot$variants = {
   warnig: 'yellow',
   danger: 'red',
   success: 'green',
 } as const
 
 export const ToastRoot = styled(Toast.Root)<ToastRootProps>`
-  background-color: ${({ theme, variant }) =>
-    theme.colors[`${toastRootVariants[variant]}`]};
+  background-color: ${({ theme, $variant }) =>
+    theme.colors[`${toastRoot$variants[$variant]}`]};
   border-radius: 6px;
   box-shadow:
     hsl(206 22% 7% / 35%) 0px 10px 38px -10px,

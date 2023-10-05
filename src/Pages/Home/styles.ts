@@ -68,18 +68,18 @@ export const Pagination = styled.div`
 `
 
 interface PaginationButtonProps {
-  variant?: 'active'
+  $variant?: 'active'
 }
 
 export const PaginationButton = styled.span<PaginationButtonProps>`
   all: unset;
   width: 2rem;
   height: 2rem;
-  background: ${({ theme, variant }) =>
-    variant ? theme.colors.purple : theme.colors['base-button']};
+  background: ${({ theme, $variant }) =>
+    $variant ? theme.colors.purple : theme.colors['base-button']};
   border-radius: 4px;
-  color: ${({ theme, variant }) =>
-    variant ? theme.colors.white : theme.colors['base-text']};
+  color: ${({ theme, $variant }) =>
+    $variant ? theme.colors.white : theme.colors['base-text']};
 
   display: flex;
   align-items: center;
@@ -93,8 +93,8 @@ export const PaginationButton = styled.span<PaginationButtonProps>`
   user-select: none;
 
   &:hover {
-    background: ${({ theme, variant }) =>
-      variant ? theme.colors['purple-dark'] : theme.colors['base-hover']};
+    background: ${({ theme, $variant }) =>
+      $variant ? theme.colors['purple-dark'] : theme.colors['base-hover']};
   }
 `
 

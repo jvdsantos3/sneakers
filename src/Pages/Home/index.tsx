@@ -127,7 +127,7 @@ export function Home() {
               </PaginationButton>
             )}
 
-            <PaginationButton variant="active">{page}</PaginationButton>
+            <PaginationButton $variant="active">{page}</PaginationButton>
 
             {page < pagesCount && (
               <PaginationButton onClick={() => handleChangePage(page + 1)}>

@@ -58,13 +58,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
       .then(() => {
         fetchProducts()
         activeToast({
-          variant: 'success',
+          $variant: 'success',
           message: 'Produto cadastrado!',
         })
       })
       .catch(() => {
         activeToast({
-          variant: 'danger',
+          $variant: 'danger',
           message: 'Erro ao cadastrar o produto, tente novamente!',
         })
       })
@@ -76,13 +76,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
       .then(() => {
         fetchProducts()
         activeToast({
-          variant: 'success',
+          $variant: 'success',
           message: 'Produto editado!',
         })
       })
       .catch(() => {
         activeToast({
-          variant: 'danger',
+          $variant: 'danger',
           message: 'Erro ao editar o produto, tente novamente!',
         })
       })
@@ -94,13 +94,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
       .then(() => {
         fetchProducts()
         activeToast({
-          variant: 'success',
+          $variant: 'success',
           message: 'Produto excluído!',
         })
       })
       .catch(() => {
         activeToast({
-          variant: 'danger',
+          $variant: 'danger',
           message: 'Erro ao editar o produto, tente novamente!',
         })
       })

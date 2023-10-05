@@ -119,7 +119,7 @@ export function ProductCard({
               <ProductDetailsActions>
                 <Dialog.Root open={openEdit} onOpenChange={setOpenEdit}>
                   <Dialog.Trigger asChild>
-                    <ProductActionButton variant="yellow">
+                    <ProductActionButton $variant="yellow">
                       Editar
                     </ProductActionButton>
                   </Dialog.Trigger>
@@ -135,7 +135,7 @@ export function ProductCard({
                 </Dialog.Root>
                 <AlertDialog.Root>
                   <AlertDialog.Trigger asChild>
-                    <ProductActionButton variant="red">
+                    <ProductActionButton $variant="red">
                       Excluir
                     </ProductActionButton>
                   </AlertDialog.Trigger>

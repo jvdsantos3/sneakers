@@ -2,7 +2,7 @@ import { ReactNode, createContext, useEffect, useRef, useState } from 'react'
 import { Toast } from '../components/Toast'
 
 interface ToastProps {
-  variant: 'warnig' | 'danger' | 'success'
+  $variant: 'warnig' | 'danger' | 'success'
   message: string
 }
 
@@ -24,7 +24,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
   const eventDateRef = useRef(new Date())
   const timerRef = useRef(0)
   const [toastProps, setToastProps] = useState<ToastProps>({
-    variant: 'warnig',
+    $variant: 'warnig',
     message: '',
   })
 
@@ -34,7 +34,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
     return new Date(inOneWeek)
   }
 
-  function activeToast({ variant, message }: ToastProps) {
+  function activeToast({ $variant, message }: ToastProps) {
     setOpen(false)
     window.clearInterval(timerRef.current)
     timerRef.current = window.setTimeout(() => {
@@ -42,11 +42,11 @@ export function ToastProvider({ children }: ToastProviderProps) {
       setOpen(true)
     }, 100)
 
-    setToastProps({ variant, message })
+    setToastProps({ $variant, message })
   }
 
   const toast = (
-    <Toast variant={toastProps.variant} message={toastProps.message} />
+    <Toast $variant={toastProps.$variant} message={toastProps.message} />
   )
 
   useEffect(() => {
